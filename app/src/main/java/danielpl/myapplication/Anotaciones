@@ -1,0 +1,122 @@
+Preparando BASIC ACTIVITY
+
+****************ELIMINAR FRAGMENT**********************
+1.- Los fragment de Activity
+2.- res/layout los fragment
+3.- res/ los directorios MENU y NAVIGATION[1]
+4.- quitar librerias GRADLE/BUILD.GRADLE (MODULE) y entramos
+5.- bajamos a full y encontraremos dos lineas en amarillo y nos las zumbamos
+6.- una vez borrada nos aparecera una barra con dos opciones pulsamos SYNC NOW
+7.- Nos vamos a la programacion del mainActivity
+8.- borramos los imports del navigation
+9.- [2]
+10.- res/layout entramos en content_main.xml
+11.- borramos el nav host
+
+
+
+/*[1]
+Puede sucerder que además de borrar el MENU Y EL NAVIGATION
+tambien borremos MIPMAP.
+RECUPERAR MIPMAP
+
+1.- RESOURCEMANAGER - debajo de project, pegadito a la izquierda
+2.- boton +
+3.- image asset
+4.- next
+5.- finish
+*/
+
+/*[2]
+CODIGO A BORRAR
+
+private AppBarConfiguration appBarConfiguration;
+
+NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, appBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
+
+*/
+
+****************ULTIMOS RETOQUES**********************
+
+1.- en content main dentro del component tree , el include debe de llevar un id "content_main"
+2.- inflate da acceso a todas las id sin usar findviewbyid
+
+ANOTACION
+para ACTIVAR el BINDING en cualquier proyecto, ya que con ponerlo una vez sobra. DEVEMOS ENTRAR ->
+
+GradleScripts/
+build.gradle(module)
+
+y copiar este codigo  antes de DEPENDECIES
+
+ buildFeatures {
+        viewBinding true
+    }
+
+**************NUEVA CREACION DE ACTIVIDAD***********************
+Una vez creemos la actividad a la hora de añadir componentes
+
+1.- constreintLayout, boton derecho/ convert view /Linear layout verticar
+2.- añadimos todo lo fque queramos
+3.- en radioGroup para que no ocupe el 100% vamos a DECLARE ATRIBUTES / layout_height / CONTENT en vede parent
+
+*************NOMBRES A DEFINIR PARA PODER TRADUCIR********************
+
+1.- directorio res/values
+2.- strings.xml
+3.- dentro de la etiqueta RESOURCE borramos todo menos el primer string
+
+DENTRO DEL TAG añadiremos strings con nuestro tags que usaremos en la aplicacion
+ej:<string name="nombre">Nombre</string>
+PARA EL SPINER
+ <string-array name="sp_ciclos">
+        <item>Selecciona un ciclo</item>
+        <item>DAM</item>
+        <item>DAW</item>
+        <item>SMR</item>
+        <item>3D</item>
+    </string-array>
+
+PARA SACAR LOS NOMBRES EN EL HINT DENTRO DE LA ACTIVIDAD
+DENTRO DEL HINT -> @string/nombre
+PARA EL SP en  ENTRIES->@array/sp_ciclos
+
+
+Una vez finalizada la creacion del objeto
+debemos mostrarla en el main
+para eso debemos usar el content_main.xml
+
+1.- añadimos scroll view
+2.- el linear que es hijo de scroll view es quien llevara el ID
