@@ -12,6 +12,7 @@ import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
@@ -72,15 +73,38 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
     }
-
+        // usamos un text view para mostrar información pero no se suele usar ES MUY SIMPLE
     private void mostrarAlumnos(){
         binding.contentMain.contenedorAlumnoMain.removeAllViews();
 
         for (Alumno a:listaAlumno) {
+            /*
             TextView txtAlumno = new TextView(MainActivity.this);//creamos un text view por codigo
             txtAlumno.setText(a.toString());
-            binding.contentMain.contenedorAlumnoMain.addView(txtAlumno);
+
+             */
+            //conectamos el layout alumno model que es el que va a contener la informacion
+            LayoutInflater lif = LayoutInflater.from(MainActivity.this);
+            lif.inflate(R.layout.alumno_model_view, null);
+
+            View alumnoView = lif.inflate(R.layout.alumno_model_view,null); //dentor de alumno view esta todo el layout alumno model
+
+            //conectamos toda la informacion
+            TextView txtNombre = alumnoView.findViewById(R.id.lbl_nombre_alumno_view);
+            TextView txtApellido = alumnoView.findViewById(R.id.lbl_Apellidos_alumno_view);
+            TextView txtCiclo = alumnoView.findViewById(R.id.lbl_ciclo_alumno_view);
+            TextView txtGrupo = alumnoView.findViewById(R.id.lbl_grupo_alumno_view);
+
+            txtNombre.setText(a.getNombre());
+            txtApellido.setText(a.getApellido());
+            txtCiclo.setText(a.getCiclo());
+            txtGrupo.setText(String.valueOf(a.getGrupo()));
+            //MOSTRAMOS INFORMACION POR PANTALLA
+            //binding.contentMain.contenedorAlumnoMain.addView(txtAlumno);
+            binding.contentMain.contenedorAlumnoMain.addView(alumnoView);
         }
-        listaAlumno.clear();
+
     }
+
+
 }

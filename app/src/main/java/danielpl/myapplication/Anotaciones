@@ -120,3 +120,8 @@ para eso debemos usar el content_main.xml
 
 1.- añadimos scroll view
 2.- el linear que es hijo de scroll view es quien llevara el ID
+
+********************** CREAR ARCHIVO XML ****************************
+
+1.- res/layout en layout boton derecho
+2.- new/ layout resource File
